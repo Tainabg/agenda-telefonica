@@ -1,0 +1,57 @@
+class Contato:
+    def _init_(self, nome, telefone):
+        self.nome = nome
+        self.telefone = telefone
+
+    def _str_(self):
+        return f'{self.nome}: {self.telefone}'
+
+class AgendaTelefonica:
+    def _init_(self):
+        self.contatos = []
+
+    def adicionar_contato(self, nome, telefone):
+        novo_contato = Contato(nome, telefone)
+        self.contatos.append(novo_contato)
+        print(f'Contato {nome} adicionado com sucesso.')
+
+    def remover_contato(self, nome):
+        for contato in self.contatos:
+            if contato.nome == nome:
+                self.contatos.remove(contato)
+                print(f'Contato {nome} removido com sucesso.')
+                return
+        print(f'Contato {nome} não encontrado.')
+
+    def pesquisar_contato(self, nome):
+        for contato in self.contatos:
+            if contato.nome == nome:
+                return contato
+        return None
+
+    def listar_contatos(self):
+        if not self.contatos:
+            print('Agenda vazia.')
+        else:
+            print('Contatos na agenda:')
+            for contato in self.contatos:
+                print(contato)
+
+# Exemplo de uso
+agenda = AgendaTelefonica()
+agenda.adicionar_contato('Alice', '1234-5678')
+agenda.adicionar_contato('Bob', '8765-4321')
+
+print('\nPesquisando contato:')
+contato = agenda.pesquisar_contato('Alice')
+if contato:
+    print(contato)
+else:
+    print('Contato não encontrado.')
+
+print('\nListando contatos:')
+agenda.listar_contatos()
+
+print('\nRemovendo contato:')
+agenda.remover_contato('Bob')
+agenda.listar_contatos()
